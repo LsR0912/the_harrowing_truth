@@ -13,7 +13,7 @@ class Room:
         self.requires_key = requires_key
 
     def show_room(self):
-        slow_print(f"You're in the {self.name}, {self.description}")
+        slow_print(f"You're in the {cp.YELLOW}{self.name}{cp.RESET}, {self.description}")
 
     def get_rooms():
         return rooms

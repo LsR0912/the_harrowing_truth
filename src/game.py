@@ -93,8 +93,30 @@ class Game:
             choice = int(input("> ")) - 1
             if 0 <= choice < len(self.location.npcs):
                 npc = self.location.npcs[choice]
-                npc.describe()
-                npc.talk()
+                # npc.describe()
+                dialogue, answers = npc.talk()
+                while True:
+                    slow_print(dialogue)
+                    if not answers:
+                        slow_print("The conversation ends.")
+                        break
+                    slow_print("How do you respond?")
+                    for i, ans in enumerate(answers, 1):
+                        slow_print(f"{i}. {ans}")
+                    slow_print(f"{len(answers)+1}. End conversation")
+                    try:
+                        ans_choice = int(input("> ")) - 1
+                        if 0 <= ans_choice < len(answers):
+                            response = answers[ans_choice]
+                            npc.respond(response)
+                            dialogue, answers = npc.talk()
+                        elif ans_choice == len(answers):
+                            slow_print("You end the conversation.")
+                            break
+                        else:
+                            slow_print("Invalid answer choice.")
+                    except ValueError:
+                        slow_print("Please enter a valid number.")
             else:
                 slow_print("Invalid choice.")
         except ValueError:
