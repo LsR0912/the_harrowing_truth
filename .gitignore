@@ -3,10 +3,10 @@
 *.pyo
 
 # Directory containing bytecode files compiled on-demand
-__pycache__/
+.\__pycache__/
 
 # Virtual Environment
-venv/
+.\venv/
 
 # Player Data
 data/
