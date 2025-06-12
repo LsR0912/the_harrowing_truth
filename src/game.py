@@ -109,6 +109,7 @@ class Game:
                 while True:
                     slow_print(dialogue)
                     if not answers:
+                        npc.dialogue_state = "start"
                         slow_print("The conversation ends.")
                         break
                     slow_print("How do you respond?")
