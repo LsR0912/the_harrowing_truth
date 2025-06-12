@@ -3,6 +3,7 @@ from rich.console import Console
 from rich.table import Table
 from item import Item
 import json
+import os
 
 class Player:
     def __init__(self):
@@ -51,6 +52,8 @@ class Player:
 
     # This method saves the player's data to a JSON file.
     def save_player(self, filename="data/players.json"):
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
         player_data = {
             "name": self.name,
             "level": self.level,
@@ -58,6 +61,7 @@ class Player:
             "inventory": [item.name for item in self.inventory],
             "xp_to_next_level": self.xp_to_next_level
         }
+        
         with open(filename, 'w') as f:
             json.dump(player_data, f, indent=4)
         slow_print(f"Player data saved to {filename}")
